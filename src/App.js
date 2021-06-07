@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from 'pages/Home'
-import Meeting from 'pages/Meeting'
+import Meeting from 'pages/MeetingDemo'
 import './App.css';
 
 function App() {
