@@ -219,6 +219,7 @@ const AgoraVideoPlayer = (props) => {
   const vidDiv= useRef(null)
   const { videoTrack, ...other } = props;
   useEffect(() => {
+    if (videoTrack === null) return
     if (vidDiv.current !== null) videoTrack.play(vidDiv.current)
     return () => {
       videoTrack.stop()

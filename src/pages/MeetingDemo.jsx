@@ -72,7 +72,6 @@ const VideoCall = (props) => {
           return prevUsers.filter((User) => User.uid !== user.uid);
         });
       });
-
       await client.join(appId, name, token, null);
       if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
@@ -81,6 +80,7 @@ const VideoCall = (props) => {
 
     if (ready && tracks) {
       console.log("init ready");
+      console.log(channelName)
       init(channelName);
     }
 

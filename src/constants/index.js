@@ -3,4 +3,8 @@ const routes = {
   MEETING: '/meeting'
 }
 
-export { routes }
+const agoraConfig = {
+  "mode": "rtc",
+  "codec": "vp8"
+}
+export { routes, agoraConfig }
