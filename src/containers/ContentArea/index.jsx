@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import VideoPlayer from 'components/VideoPlayer'
+import { ContentContainer } from './styled'
 
 const ContentArea = props => {
   return (
-    <div style={{height: '550px', border: '1px solid black'}}>
+    <ContentContainer>
       <VideoPlayer/>
-    </div>
+    </ContentContainer>
   )
 }
 

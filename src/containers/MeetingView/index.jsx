@@ -2,18 +2,19 @@ import AttendeeArea from 'containers/AttendeeArea'
 import ChatArea from 'containers/ChatArea'
 import ContentArea from 'containers/ContentArea'
 import PropTypes from 'prop-types'
+import { MeetingContainer, ContentAttendeeContainer, ChatContainer } from './styled'
 
 const MeetingView = props => {
   return (
-    <div style={{ display: 'flex', padding: '10px 10px', justifyContent: 'space-between' }}>
-      <div style={{ width: '78%', display: 'flex', flexDirection:'column' }}>
+    <MeetingContainer>
+      <ContentAttendeeContainer>
         <ContentArea />
         <AttendeeArea />
-      </div>
-      <div style={{border: '1px solid black', width: '18%'}}>
+      </ContentAttendeeContainer>
+      <ChatContainer>
         <ChatArea />
-      </div>
-    </div>
+      </ChatContainer>
+    </MeetingContainer>
   )
 }
 

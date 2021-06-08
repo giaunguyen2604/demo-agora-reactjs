@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import {
-//   AgoraVideoPlayer,
-//   createClient,
-//   createMicrophoneAndCameraTracks
-// } from "agora-rtc-react";
-
 import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks} from 'services/agora'
 
 const config = { 

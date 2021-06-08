@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import SingleAttendee from 'components/SingleAttendee'
+import { AttendeeContainer } from './styled'
 
 const AttendeeArea = props => {
+  
   return (
-    <div style={{display: 'flex', marginTop: '15px', overflowY:'scroll'}}>
+    <AttendeeContainer>
       <SingleAttendee/>
-      <SingleAttendee/>
-      <SingleAttendee/>
-    </div>
+    </AttendeeContainer>
   )
 }
 
