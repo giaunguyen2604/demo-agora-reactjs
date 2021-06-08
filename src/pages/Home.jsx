@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 function Home() {
   return (
     <div>
-      Home page
     </div>
   )
 }

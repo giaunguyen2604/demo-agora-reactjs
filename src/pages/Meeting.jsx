@@ -5,7 +5,7 @@ import MeetingView from 'containers/MeetingView'
 function Meeting() {
   
   return (
-    <div>
+    <div style={{backgroundColor: '#bdbbbb3d'}}>
       <MeetingView/>
     </div>
   )

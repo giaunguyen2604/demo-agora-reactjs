@@ -53,15 +53,15 @@ const MeetingView = props => {
         if (type === "audio") {
           user.audioTrack?.stop();
         }
-        // if (type === "video") {
-        //   setAttendees((prevUsers) => {
-        //     const index = prevUsers.findIndex(atd => atd.uid === user.uid)
-        //     console.log("index=",index)
-        //     const newAttendee = [...prevUsers]
-        //     newAttendee[index] = user
-        //     setAttendees(newAttendee)
-        //   })
-        // }
+        if (type === "video") {
+          setAttendees((prevUsers) => {
+            const index = prevUsers.findIndex(atd => atd.uid === user.uid)
+            console.log("index=",index)
+            const newAttendee = [...prevUsers]
+            newAttendee[index] = user
+            setAttendees(newAttendee)
+          })
+        }
       });
 
       client.on("user-left", (user) => {
@@ -72,16 +72,14 @@ const MeetingView = props => {
       });
 
       await client.join(appId, name, token, null);
-      //if (tracks) await tracks[1].setEnabled(false)
       if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
-
     };
 
-    if (ready && tracks) {
-      console.log("init ready");
-      init(channelName);
-    }
+    // if (ready && tracks) {
+    //   console.log("init ready");
+    //   init(channelName);
+    // }
 
     return  () => {
       client.removeAllListeners();
@@ -101,7 +99,7 @@ const MeetingView = props => {
     <MeetingContainer>
       <ContentAttendeeContainer>
         <ContentArea />
-        <AttendeeArea attendees={attendees} tracks={tracks} leaveChannel={leaveChannel}/>
+        <AttendeeArea attendees={[]} tracks={null} leaveChannel={leaveChannel}/>
       </ContentAttendeeContainer>
       <ChatContainer>
         <ChatArea />
