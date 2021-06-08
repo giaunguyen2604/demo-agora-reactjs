@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from 'pages/Home'
-import Meeting from 'pages/MeetingDemo'
+import Meeting from 'pages/Meeting'
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div>
-        <h2>Welcome to Demo Agora Application</h2>
+        <h2 className="text-center mb-2 mt-2">Welcome to Demo Agora Application</h2>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Home </Link></li>

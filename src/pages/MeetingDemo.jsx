@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  AgoraVideoPlayer,
-  createClient,
-  createMicrophoneAndCameraTracks
-} from "agora-rtc-react";
+// import {
+//   AgoraVideoPlayer,
+//   createClient,
+//   createMicrophoneAndCameraTracks
+// } from "agora-rtc-react";
+
+import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks} from 'services/agora'
 
 const config = { 
   mode: "rtc", codec: "vp8",
@@ -14,7 +16,7 @@ const token= process.env.REACT_APP_TEMP_TOKEN;
 
 const App = () => {
   const [inCall, setInCall] = useState(false);
-  const [channelName, setChannelName] = useState("");
+  const [channelName, setChannelName] = useState(process.env.REACT_APP_CHANNEL);
   return (
     <div>
       <h1 className="heading">Agora RTC NG SDK React Wrapper</h1>
@@ -109,12 +111,12 @@ const Videos = (props) => {
       <div id="videos">
         {/* AgoraVideoPlayer component takes in the video track to render the stream,
             you can pass in other props that get passed to the rendered div */}
-        <AgoraVideoPlayer style={{height: '95%', width: '95%'}} className='vid' videoTrack={tracks[1]} />
+        <AgoraVideoPlayer style={{height: '200px', width: '200px'}} className='vid' videoTrack={tracks[1]} />
         {users.length > 0 &&
           users.map((user) => {
             if (user.videoTrack) {
               return (
-                <AgoraVideoPlayer style={{height: '95%', width: '95%'}} className='vid' videoTrack={user.videoTrack} key={user.uid} />
+                <AgoraVideoPlayer style={{height: '200px', width: '200px'}} className='vid' videoTrack={user.videoTrack} key={user.uid} />
               );
             } else return null;
           })}
@@ -168,15 +170,11 @@ export const Controls = (props) => {
 };
 
 const ChannelForm = (props) => {
-  const { setInCall, setChannelName } = props;
+  const { setInCall } = props;
 
   return (
     <form className="join">
       {appId === '' && <p style={{color: 'red'}}>Please enter your Agora App ID in App.tsx and refresh the page</p>}
-      <input type="text"
-        placeholder="Enter Channel Name"
-        onChange={(e) => setChannelName(e.target.value)}
-      />
       <button onClick={(e) => {
         e.preventDefault();
         setInCall(true);
