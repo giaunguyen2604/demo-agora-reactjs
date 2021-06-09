@@ -1,4 +1,4 @@
-import React,  { useEffect, useState } from 'react'
+import React,  { useEffect, useState, useRef } from 'react'
 import AttendeeArea from 'containers/AttendeeArea'
 import ChatArea from 'containers/ChatArea'
 import ContentArea from 'containers/ContentArea'
@@ -15,7 +15,7 @@ const MeetingView = props => {
   const [start, setStart] = useState(false);
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const client = useClient();
-
+ 
   const appId = process.env.REACT_APP_ID
   const token= process.env.REACT_APP_TEMP_TOKEN;
   const channelName = process.env.REACT_APP_CHANNEL
@@ -56,7 +56,6 @@ const MeetingView = props => {
         if (type === "video") {
           setAttendees((prevUsers) => {
             const index = prevUsers.findIndex(atd => atd.uid === user.uid)
-            console.log("index=",index)
             const newAttendee = [...prevUsers]
             newAttendee[index] = user
             setAttendees(newAttendee)
@@ -72,14 +71,15 @@ const MeetingView = props => {
       });
 
       await client.join(appId, name, token, null);
+
       if (tracks) await client.publish([tracks[0], tracks[1]]);
       setStart(true);
     };
 
-    // if (ready && tracks) {
-    //   console.log("init ready");
-    //   init(channelName);
-    // }
+    if (ready && tracks) {
+      console.log("init ready");
+      init(channelName);
+    }
 
     return  () => {
       client.removeAllListeners();
