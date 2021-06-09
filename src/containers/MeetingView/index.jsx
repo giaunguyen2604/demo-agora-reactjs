@@ -99,7 +99,7 @@ const MeetingView = props => {
     <MeetingContainer>
       <ContentAttendeeContainer>
         <ContentArea />
-        <AttendeeArea attendees={[]} tracks={null} leaveChannel={leaveChannel}/>
+        <AttendeeArea attendees={attendees} tracks={tracks} leaveChannel={leaveChannel}/>
       </ContentAttendeeContainer>
       <ChatContainer>
         <ChatArea />
