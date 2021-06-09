@@ -43,7 +43,9 @@ const SingleAttendee = props => {
 }
 
 SingleAttendee.propTypes = {
-
+  audioTrack: PropTypes.any, 
+  videoTrack: PropTypes.any, 
+  leaveChannel: PropTypes.any
 }
 
 export default SingleAttendee

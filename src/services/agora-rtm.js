@@ -73,9 +73,7 @@ class RTMClient extends EventEmitter {
   }
 
   async sendChannelMessage(text, channelName) {
-    console.log('before===', text)
     if (!this.channels[channelName] || !this.channels[channelName].joined) return
-    console.log("textttt ==========", text)
     return this.channels[channelName].channel.sendMessage({ text })
   }
 

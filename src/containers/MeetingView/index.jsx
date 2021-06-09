@@ -1,18 +1,17 @@
-import React,  { useEffect, useState, useRef } from 'react'
+import React,  { useEffect, useState} from 'react'
+import { useHistory } from 'react-router-dom'
 import AttendeeArea from 'containers/AttendeeArea'
 import ChatArea from 'containers/ChatArea'
 import ContentArea from 'containers/ContentArea'
-import PropTypes from 'prop-types'
 import { MeetingContainer, ContentAttendeeContainer, ChatContainer } from './styled'
-import { AgoraVideoPlayer, createClient, createMicrophoneAndCameraTracks} from 'services/agora'
+import { createClient, createMicrophoneAndCameraTracks} from 'services/agora'
 import { agoraConfig } from 'constants/index'
 
 const useClient = createClient(agoraConfig);
 const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
 
-const MeetingView = props => {
+const MeetingView = () => {
   const [attendees, setAttendees] = useState([])
-  const [start, setStart] = useState(false);
   const { ready, tracks } = useMicrophoneAndCameraTracks();
   const client = useClient();
  
@@ -73,7 +72,7 @@ const MeetingView = props => {
       await client.join(appId, name, token, null);
 
       if (tracks) await client.publish([tracks[0], tracks[1]]);
-      setStart(true);
+      // setStart(true);
     };
 
     if (ready && tracks) {
@@ -84,7 +83,7 @@ const MeetingView = props => {
     return  () => {
       client.removeAllListeners();
     }
-
+    // eslint-disable-next-line
   }, [channelName, client, ready, tracks]);
 
   const leaveChannel = async () => {
@@ -92,7 +91,7 @@ const MeetingView = props => {
     client.removeAllListeners();
     tracks[0].close();
     tracks[1].close();
-    setStart(false);
+    // setStart(false);
   };
 
   return (
