@@ -10,10 +10,14 @@ const rtm = new RtmClient()
 
 const ChatArea = props => {
 
-  const [chatList, setChatList] = useState([{username: 'giau.nguyen', content: 'hello'}])
+  const uid = localStorage.getItem('uid')
+  const token = localStorage.getItem('tokenrtm')
+
+  const [chatList, setChatList] = useState([])
+
   const submitChat = (content) => {
-    setChatList([...chatList, {username: 'giau.nguyen', content}])
-    rtm.sendChannelMessage("how are you?", "chatmessage").then(() => {
+    setChatList([...chatList, { username: uid, content }])
+    rtm.sendChannelMessage(content, "chatmessage").then(() => {
       console.log('account: ' + rtm.accountName + ' send success')
     }).catch((err) => {
       console.log("Send message to channel fail")
@@ -23,8 +27,6 @@ const ChatArea = props => {
 
   useEffect(() => {
     rtm.init(process.env.REACT_APP_ID)
-    const uid = localStorage.getItem('uid')
-    const token = localStorage.getItem('tokenrtm')
 
     rtm.login(uid, token).then(() => {
       rtm.joinChannel("chatmessage").then(() => {
@@ -39,21 +41,22 @@ const ChatArea = props => {
       console.log('channel ', channelName, ' member: ', memberId, ' joined')
     })
 
-    rtm.on('chatmessage', async ({ channelName, args }) => {
+    rtm.on('ChannelMessage', async ({ channelName, args }) => {
       const [message, memberId] = args
-      console.log(message)
-      console.log(memberId)
+      setChatList((prevChat) => {
+        return [...prevChat, { username: memberId, content: message.text }]
+      })
     })
 
-    
+
   }, [rtm])
 
   return (
     <ChatAreaContainer>
       <ChatDisplayArea>
-        {chatList && chatList.map(chat => <ChatItem chat={chat}/>)}
+        {chatList && chatList.map((chat, index) => <ChatItem chat={chat} key={index}/>)}
       </ChatDisplayArea>
-      <ChatBox  submitChat={submitChat}/>
+      <ChatBox submitChat={submitChat} />
     </ChatAreaContainer>
   )
 }
